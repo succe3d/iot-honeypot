@@ -341,8 +341,14 @@ The `firmware-updater` is deliberately **not** exposed to the internet. Any conn
 <p align="center">
   <img width="1186" height="783" alt="file structure" src="https://github.com/user-attachments/assets/b8cc60c7-14ad-41b0-bab9-899fa248e2da" />
 </p>
----
 
+---
+## Dashboard View
+<p align="center">
+  <img width="1658" height="837" alt="image" src="https://github.com/user-attachments/assets/c477a190-8c36-444e-890f-9e1a02349e45" />
+</p>
+
+---
 ## License
 
 [Apache License 2.0](LICENSE)
