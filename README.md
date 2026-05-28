@@ -11,7 +11,7 @@
 
 ## Why ZeroTrace?
 
-Today's IoT forensics captures network logs but rarely kernel-level activity. When an attacker pivots between containers, drops a binary in `/tmp`, or injects code into a running process, traditional tools miss it entirely.
+Today's IoT forensics captures network logs but rarely kernel level activity. When an attacker pivots between containers, drops a binary in `/tmp`, or injects code into a running process, traditional tools miss it entirely.
 
 ZeroTrace solves this by placing four [Cilium Tetragon](https://github.com/cilium/tetragon) eBPF kprobes at the kernel level inside an IoT honeypot that emulates a **Hikvision DS-2CD2183G2 IP camera**. Every kernel event is tagged with a UUID per attacker, then sealed into a tamper-evident evidence chain (SHA-256, [OpenTimestamps](https://opentimestamps.org/) Bitcoin anchor, MinIO WORM).
 <p align="center">
