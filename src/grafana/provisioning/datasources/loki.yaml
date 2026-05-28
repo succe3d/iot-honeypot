@@ -1,0 +1,13 @@
+# loki.yaml — Grafana data source provisioning
+# Deploy to: /opt/grafana/provisioning/datasources/loki.yaml
+#
+# Auto-registers Loki as the default data source on Grafana startup.
+
+apiVersion: 1
+datasources:
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    isDefault: true
+    editable: false

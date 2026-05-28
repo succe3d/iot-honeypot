@@ -1,0 +1,16 @@
+# provider.yaml — Grafana dashboard provisioning
+# Deploy to: /opt/grafana/provisioning/dashboards/provider.yaml
+#
+# Loads dashboard JSON files from /var/lib/grafana/dashboards on startup.
+
+apiVersion: 1
+providers:
+  - name: default
+    orgId: 1
+    folder: ''
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: false
