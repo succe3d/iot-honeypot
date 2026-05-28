@@ -1,18 +1,67 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# SPDX-License-Identifier: Apache-2.0
 
-# Other files and folders
-.settings/
+# ── Python ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.whl
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# ── Docker ──────────────────────────────────────────────
+.env
+docker-compose.override.yml
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# ── Forensic artifacts (never commit evidence) ──────────
+/forensics/
+*.qcow2
+*.zst
+*.pcap
+*.pcapng
+*.memdump
+evidence_manifest.jsonl
+
+# ── IDE / Editor ────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── OS generated ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+
+# ── Secrets (never commit credentials) ─────────────────
+*.pem
+*.key
+.minio-password
+.env.local
+.env.production
+
+# ── Build artifacts ─────────────────────────────────────
+*.o
+*.so
+*.a
+linux-5.15.162/
+
+# ── LaTeX build artifacts ───────────────────────────────
+*.aux
+*.log
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+
+# ── Volatility ISF (large JSON, downloaded via CI) ─────
+*.isf.json
+
+# ── Claude Code local state ────────────────────────────
+.claude/
