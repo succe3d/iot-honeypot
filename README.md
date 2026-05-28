@@ -40,7 +40,7 @@ If any prerequisite is missing, install it before proceeding:
 # Install Python 3 + pip (Ubuntu/Debian)
 sudo apt-get update && sudo apt-get install -y python3 python3-pip git
 
-# Install Docker (official script — works on Ubuntu, Debian, Fedora, CentOS)
+# Install Docker (official script: works on Ubuntu, Debian, Fedora, CentOS)
 curl -fsSL https://get.docker.com | sh
 sudo usermod -aG docker $USER
 ```
@@ -121,7 +121,7 @@ disown
 
 ```bash
 # 1. Mount forensics volume
-#    IMPORTANT: pin by UUID, never /dev/sdX — Azure reshuffles device letters on stop/start
+#    IMPORTANT: pin by UUID, never /dev/sdX Azure reshuffles device letters on stop/start
 DATA_DEV=$(lsblk -bno NAME,SIZE,MOUNTPOINT | awk '$2==137438953472 && $3=="" {print "/dev/"$1; exit}')
 sudo mkfs.ext4 "$DATA_DEV"
 DATA_UUID=$(sudo blkid -s UUID -o value "$DATA_DEV")
@@ -298,7 +298,7 @@ Four eBPF kprobes defined in [`src/tetragon/policies/zt-forensics.yaml`](src/tet
 }
 ```
 
-A `curl` process spawned from `/bin/sh` connected to `172.20.0.12:8080` (the firmware-updater). The MQTT container should never originate traffic to that port — this is a **lateral movement** ZTA violation.
+A `curl` process spawned from `/bin/sh` connected to `172.20.0.12:8080` (the firmware-updater). The MQTT container should never originate traffic to that port, this is a **lateral movement** ZTA violation.
 
 </details>
 
@@ -306,7 +306,7 @@ A `curl` process spawned from `/bin/sh` connected to `172.20.0.12:8080` (the fir
 
 ## SPIFFE/SPIRE Zero Trust
 
-Every container in the honeypot receives a short-lived X.509 SVID from [SPIRE v1.14.1](https://github.com/spiffe/spire), creating cryptographic workload identity without static credentials.
+Every container in the honeypot receives a short lived X.509 SVID from [SPIRE v1.14.1](https://github.com/spiffe/spire), creating cryptographic workload identity without static credentials.
 
 ```
 Trust Domain: spiffe://iot-honeypot.local
@@ -317,11 +317,11 @@ Workload Registration:
   firmware-updater → spiffe://iot-honeypot.local/workload/firmware-updater
   behavior-sim     → spiffe://iot-honeypot.local/workload/behavior-sim
 
-Attestor: Docker (label-based)
-SVID Lifetime: 1 hour (auto-rotated)
+Attestor: Docker (label based)
+SVID Lifetime: 1 hour (auto rotated)
 ```
 
-When an attacker compromises a container and attempts lateral movement, the destination container can validate (or reject) the SVID — providing cryptographic evidence of trust boundary violations that correlates with Tetragon's kernel-level observations.
+When an attacker compromises a container and attempts lateral movement, the destination container can validate (or reject) the SVID providing cryptographic evidence of trust boundary violations that correlates with Tetragon's kernel level observations.
 
 ---
 
