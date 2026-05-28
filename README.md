@@ -200,7 +200,7 @@ ls /sys/kernel/btf/vmlinux
 ```
 If check 2 shows `nginx` or `openresty` instead of `App-webs/2.0`, the nginx config isn't loaded correctly. Verify `src/honeypot/nginx-iot.conf` was copied to the right location.
 
-If check 4 fails with "container not found", Tetragon crashed on startup — check `docker logs tetragon` and verify BTF (check 7).
+If check 4 fails with "container not found", Tetragon crashed on startup, check `docker logs tetragon` and verify BTF (check 7).
 
 ---
 
@@ -208,8 +208,8 @@ If check 4 fails with "container not found", Tetragon crashed on startup — che
 
 > [!IMPORTANT]
 > Replace these placeholders with your values before running commands:
-> - `YOUR_HOST_IP` — your server's public or private IP address
-> - `YOUR_GRAFANA_PASSWORD` — set this in [`src/grafana/docker-compose.yml`](src/grafana/docker-compose.yml) under the `GF_SECURITY_ADMIN_PASSWORD` environment variable
+> - `YOUR_HOST_IP` = your server's public or private IP address
+> - `YOUR_GRAFANA_PASSWORD` = set this in [`src/grafana/docker-compose.yml`](src/grafana/docker-compose.yml) under the `GF_SECURITY_ADMIN_PASSWORD` environment variable
 
 ### Dashboard
 
@@ -224,7 +224,7 @@ ssh -L 3000:127.0.0.1:3000 ubuntu@YOUR_HOST_IP
 #    Login: admin / YOUR_GRAFANA_PASSWORD
 ```
 
-A pre-built 16-panel dashboard loads automatically. Grafana binds to `127.0.0.1` only — it is never exposed to the internet.
+A pre built 16 panel dashboard loads automatically. Grafana binds to `127.0.0.1` only it is never exposed to the internet.
 
 ### Data on Disk
 
@@ -254,10 +254,10 @@ jq -r '.session_id' /forensics/manifest/evidence_manifest.jsonl | sort -u
 |------|---------|-------------|
 | [`src/tetragon/policies/zt-forensics.yaml`](src/tetragon/policies/zt-forensics.yaml) | eBPF kprobe definitions (4 hooks) | `/opt/tetragon/policies/` |
 | [`src/correlator/session_correlator.py`](src/correlator/session_correlator.py) | Maps src_ip &rarr; UUID4, writes manifest, triggers PANDA | `/opt/correlator/` |
-| [`src/honeypot/docker-compose.yml`](src/honeypot/docker-compose.yml) | 4-container IoT microservices stack | `/opt/honeypot/` |
+| [`src/honeypot/docker-compose.yml`](src/honeypot/docker-compose.yml) | 4 container IoT microservices stack | `/opt/honeypot/` |
 | [`src/honeypot/nginx-iot.conf`](src/honeypot/nginx-iot.conf) | Hikvision fingerprint (`App-webs/2.0` header) | `/opt/honeypot/` |
 | [`src/honeypot/mosquitto.conf`](src/honeypot/mosquitto.conf) | MQTT broker (attacker entry point, port 1883) | `/opt/honeypot/` |
-| [`src/honeypot/firmware_server.py`](src/honeypot/firmware_server.py) | Internal-only ZTA violation target (port 8080) | `/opt/honeypot/` |
+| [`src/honeypot/firmware_server.py`](src/honeypot/firmware_server.py) | Internal only ZTA violation target (port 8080) | `/opt/honeypot/` |
 | [`src/honeypot/iot_behavior_sim.py`](src/honeypot/iot_behavior_sim.py) | Gaussian MQTT telemetry (realistic device traffic) | `/opt/honeypot/` |
 | [`src/spire/conf/server.conf`](src/spire/conf/server.conf) | SPIRE server (trust domain `iot-honeypot.local`) | `/opt/spire/conf/` |
 | [`src/spire/conf/agent.conf`](src/spire/conf/agent.conf) | SPIRE agent (Docker WorkloadAttestor) | `/opt/spire/conf/` |
@@ -271,9 +271,9 @@ Four eBPF kprobes defined in [`src/tetragon/policies/zt-forensics.yaml`](src/tet
 | Hook | Syscall | Why It Matters | Filter |
 |------|---------|----------------|--------|
 | `tcp_connect` | No (kernel function) | Catches lateral movement when an attacker pivots from the MQTT broker to the internal firmware-updater (172.20.0.12:8080) | `NotIn /usr/sbin/mosquitto` |
-| `sys_execve` | Yes | Detects binary drop-and-execute from world-writable directories — the classic Mirai IoT staging pattern | `Prefix /tmp/ /dev/shm/ /var/tmp/` |
-| `sys_memfd_create` | Yes | Flags fileless malware that never touches disk — invisible to filesystem-based detection | None (every call is suspicious) |
-| `sys_ptrace` | Yes | Catches process injection via `PTRACE_POKEDATA` — attacker writing code into a victim process's memory | `arg0 == 4` (POKEDATA) |
+| `sys_execve` | Yes | Detects binary drop and execute from world writable directories. The classic Mirai IoT staging pattern | `Prefix /tmp/ /dev/shm/ /var/tmp/` |
+| `sys_memfd_create` | Yes | Flags fileless malware that never touches disk, its invisible to filesystem based detection | None (every call is suspicious) |
+| `sys_ptrace` | Yes | Catches process injection via `PTRACE_POKEDATA`, the attacker is writing code into a victim process's memory | `arg0 == 4` (POKEDATA) |
 
 <details>
 <summary><strong>Sample Tetragon event (lateral movement)</strong></summary>
@@ -339,7 +339,7 @@ The `firmware-updater` is deliberately **not** exposed to the internet. Any conn
 
 ## Repository Structure
 <p align="center">
-  <img width="1672" height="820" alt="file structure" src="https://github.com/user-attachments/assets/80d9e53a-22f4-4e78-a11a-89a2bd8ada88" />
+  <img width="1186" height="783" alt="file structure" src="https://github.com/user-attachments/assets/b8cc60c7-14ad-41b0-bab9-899fa248e2da" />
 </p>
 ---
 
