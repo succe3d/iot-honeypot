@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: Apache-2.0
+# ZeroTrace — Python dependencies
+
+# Core (honeypot + correlator)
+paho-mqtt>=1.6.1,<3.0
+flask>=3.0,<4.0
+requests>=2.31,<3.0
+
+# Forensics
+volatility3==2.27.0
+opentimestamps-client>=0.7
+
+# Paper figures + data analysis
+matplotlib>=3.8,<4.0
+seaborn>=0.13,<1.0
+pandas>=2.1,<3.0
+numpy>=1.26,<3.0
+networkx>=3.2,<4.0
+plotly>=5.18,<6.0
+kaleido>=0.2.1,<1.0
+
+# Document generation
+python-docx>=1.1,<2.0
+
+# Development
+pytest>=8.0,<9.0
+ruff>=0.4,<1.0
+black>=24.0,<25.0
+mypy>=1.9,<2.0
+yamllint>=1.35,<2.0
+isort>=5.13,<6.0
