@@ -21,9 +21,6 @@ ZeroTrace solves this by placing four [Cilium Tetragon](https://github.com/ciliu
 
 ## Setup
 
-> [!NOTE]
-> Anywhere you see `YOUR_ORG` in this README, replace it with your GitHub username or organization name.
-
 ### Prerequisites (all options)
 
 | Requirement | Minimum | How to check |
